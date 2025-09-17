@@ -44,9 +44,16 @@ public class ContaDao implements IContaDao {
     }
     
     @Override
-    public Conta buscarPeloNumero(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPeloNumero'");
+    public Conta buscarPeloNumero(long id) throws Exception {
+        Conta c = null;
+        pstmReadByNumber.setLong(1, id);
+        ResultSet resultado = pstmReadByNumber.executeQuery();
+        if (resultado.next()) {
+            long n = resultado.getLong("nro_conta");
+            BigDecimal s = resultado.getBigDecimal("saldo");
+            c = new Conta(n, s);
+        }
+        return c;
     }
 
     @Override

@@ -8,5 +8,7 @@ public class App {
         List<Conta> contas;
         contas = dao.lerTodas();
         System.out.println(contas);
+        Conta conta = dao.buscarPeloNumero(101);
+        System.out.println(conta);
     }
 }
