@@ -19,8 +19,10 @@ public class TitularAppApplication implements CommandLineRunner {
 	public void criar() {
 		Titular t;
 		t = new Titular();
-		t.setNome("Thiago");
-		t.setCpf("333.333.333-3");
+		String nome = input("Nome do novo titular: ");
+		t.setNome(nome);
+		String cpf = input("CPF do novo titular: ");
+		t.setCpf(cpf);
 		titularrepo.save(t);
 		System.out.println("Titular criado com o id " + t.getId());
 	}
@@ -37,6 +39,7 @@ public class TitularAppApplication implements CommandLineRunner {
 		System.out.println("# GERENCIADOR DE TITULARES!");
 		boolean sair = false;
 		String menu = "\n(1) Mostrar todos os titulares";
+		menu += "\n(2) Criar novo titular";
 		menu += "\n(0) Sair \n";
 		menu += "Escolha uma opção: ";
 
@@ -45,6 +48,9 @@ public class TitularAppApplication implements CommandLineRunner {
 			switch (op) {
 				case "1":
 					lerTudo();
+					break;
+				case "2":
+					criar();
 					break;
 				case "0":
 					sair = true;
