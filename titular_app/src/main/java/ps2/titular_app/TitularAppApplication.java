@@ -34,12 +34,17 @@ public class TitularAppApplication implements CommandLineRunner {
 		}
 	}
 
+	public void listar() {
+		long id = Long.parseLong(input("Número do titular a ser buscado: "));
+	}
+
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("# GERENCIADOR DE TITULARES!");
 		boolean sair = false;
-		String menu = "\n(1) Mostrar todos os titulares";
-		menu += "\n(2) Criar novo titular";
+		String menu = "\n(1) Listar todos os titulares";
+		menu += "\n(2) Buscar um titular específico pelo número";
+		menu += "\n(3) Criar novo titular";
 		menu += "\n(0) Sair \n";
 		menu += "Escolha uma opção: ";
 
@@ -50,6 +55,9 @@ public class TitularAppApplication implements CommandLineRunner {
 					lerTudo();
 					break;
 				case "2":
+					buscar();
+					break;
+				case "3":
 					criar();
 					break;
 				case "0":
