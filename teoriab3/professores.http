@@ -1,0 +1,14 @@
+GET http://localhost:8080/rest/professores
+
+###
+POST http://localhost:8080/rest/professores
+Content-Type: application/json
+
+{
+    "nome": "Charles",
+    "matricula": "1234",
+    "area": "Segurança",
+    "faculdade" : {
+        "id" : "1"
+    }
+}

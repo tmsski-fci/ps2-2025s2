@@ -1,0 +1,10 @@
+GET http://localhost:8080/dev/faculdades
+
+###
+POST http://localhost:8080/dev/faculdades
+Content-Type: application/json
+
+{
+    "nome" : "Faculdade de Direito", 
+    "anoFundacao" : "1960"
+}
