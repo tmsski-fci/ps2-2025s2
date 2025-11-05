@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Filmes</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css"> 
+    </head>
+    <body>
+        <h1>Gerenciamento de Filmes</h1>
+        <!-- <button onclick="adicionarFilmes">Adicionar Filmes</button> -->
+
+            <label for="titulo">Título: </label>
+            <input type="Text" id="titulo">
+            <br>
+            <label for="ano">Ano: </label>
+            <input type="Text" id="ano">
+            <br>
+            <label for="pais">País: </label>
+            <input type="Text" id="pais">
+            <br>
+            <Button onclick="adicionarFilme()">Salvar</Button>
+
+        <table id="tabelaFilmes">
+            <tr>
+                <th>id</th> <th>titulo</th> <th>ano</th> <th>país</th>
+            </tr> 
+            <tbody id="corpoTabelaFilmes">
+            </tbody>   
+        </table>
+        <script>
+            const corpoTabelaFilmes = document.querySelector("#corpoTabelaFilmes");
+            const titulo = document.querySelector("#titulo");
+            const ano = document.querySelector("#ano");
+            const pais = document.querySelector("#pais");
+            listarTodosFilmes();
+
+            function listarTodosFilmes() {
+                const url = "/api/filmes";
+                fetch(url)
+                .then(resposta => resposta.json())
+                .then(json => preencherTabelaFilmes(json));
+            }
+
+            function preencherTabelaFilmes(filmes) {
+                corpoTabelaFilmes.innerHTML = "";
+
+                const n = filmes.length;
+                for (var i = 0; i < n; i++) {
+                    let linha = corpoTabelaFilmes.insertRow();
+                    let celulaId = linha.insertCell();
+                    let celulaTitulo = linha.insertCell();
+                    let celulaAno = linha.insertCell();
+                    let celulaPais = linha.insertCell();
+
+                    celulaId.textContent = filmes[i].id;
+                    celulaTitulo.textContent = filmes[i].titulo;
+                    celulaAno.textContent = filmes[i].ano;
+                    celulaPais.textContent = filmes[i].pais;
+                }
+            }
+            function adicionarFilme() {
+                const url = "/api/filmes";         
+                fetch (url, { 
+                    method: "POST",
+                    body: JSON.stringify({
+                        titulo: titulo.value,
+                        ano: ano.value,
+                        pais: pais.value,
+                    }),
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                })
+                .then(resposta => resposta.json())
+                .then(json => listarTodosFilmes());           
+            }
+
+        </script> 
+    </body>
+</html>

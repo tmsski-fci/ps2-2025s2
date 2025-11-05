@@ -1,0 +1,11 @@
+GET http://localhost:8080/api/filmes
+###
+
+POST http://localhost:8080/api/filmes
+Content-Type: application/json
+
+{
+    "titulo" : "Star Wars 3,5: O Império Contra-Contrataca",
+    "ano" : "1880",
+    "pais" : "EUA"
+}
